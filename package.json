@@ -1,0 +1,29 @@
+{
+    "name": "js-wdio-guidebook",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "wdio": "wdio run wdio.conf.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/sukantg/js-wdio-guidebook.git"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/sukantg/js-wdio-guidebook/issues"
+    },
+    "homepage": "https://github.com/sukantg/js-wdio-guidebook#readme",
+    "devDependencies": {
+        "@wdio/cli": "^7.27.0",
+        "@wdio/local-runner": "^7.27.0",
+        "@wdio/mocha-framework": "^7.26.0",
+        "@wdio/spec-reporter": "^7.26.0",
+        "chromedriver": "^107.0.3",
+        "wdio-chromedriver-service": "^8.0.0"
+    }
+}
