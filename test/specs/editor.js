@@ -1,10 +1,12 @@
 import { user1 } from './../fixtures/users';
 import Editor from './../pageObjects/Editor.page';
 import Auth from './../pageObjects/Auth.page'
+import { Chance } from 'chance';
 
 
 const editor = new Editor();
 const auth = new Auth()
+const chance = new Chance();
 
 describe('Post editor', function(){
     before(function(){
@@ -26,12 +28,16 @@ describe('Post editor', function(){
     })
 
     it('should let you publish an article', function(){
-        editor.submitArticle({
-            title: 'Test Title',
-            description: 'Test Description',
-            body: 'Test Body',
-            tags: ['Tag1']
-        })
+
+        const articleDetails = {
+            title: chance.sentence({words : 3}),
+            description: chance.sentence({ words : 7}),
+            body: chance.paragraph({ words : 4}),
+            tags: [chance.word(),chance.word()]
+        }
+        
+        editor.submitArticle(articleDetails);
+
         expect(browser).toHaveUrl('articles/test-title', {containing:true});
         $('button=*Delete Article').click();
     })

@@ -25,5 +25,8 @@
         "@wdio/spec-reporter": "^7.26.0",
         "chromedriver": "^107.0.3",
         "wdio-chromedriver-service": "^8.0.0"
+    },
+    "dependencies": {
+        "chance": "^1.1.9"
     }
 }
