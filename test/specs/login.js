@@ -1,13 +1,9 @@
 
-import Auth from '../../pageObjects/Auth.page';
+import Auth from '../pageObjects/Auth.page';
+import { user1  } from '../fixtures/users';
 
 const auth = new Auth();
 
-function login(username, password){
-    auth.$email.setValue(username);
-    auth.$password.setValue(password);
-    auth.$signIn.click();
-}
 // Login Page
 
 describe ('Login Page', function(){
@@ -18,20 +14,28 @@ describe ('Login Page', function(){
 
     // Login works with correct username and password
     it('should let you login', function(){
-        auth.login('demo@learnwebdriver.com','wdiodemo');
-        auth.$signIn.waitForExist({reverse : true});
+        auth.login(user1);
+        
         expect(auth.$errorMessages).not.toBeExisting();
     })
 
     // Login fails with incorrect username
     it('should fail without password', function(){
-       auth.login('','wdiodemo');
+       auth.login({
+        email: '',
+        password: user1.password
+       });
+
        expect(auth.$errorMessages).toHaveText('Email can\'t be blank');
     })
 
     // Login fails with incorrect password
     it('should fail without username', function(){
-       auth.login('demo@learnwebdriver.com','');
+       auth.login({
+        email: user1.email,
+        password:''
+       });
+
        expect(auth.$errorMessages).toHaveText('Password can\'t be blank');
     })
 })

@@ -1,5 +1,12 @@
+import Generic from './Generic.page';
 
-class Auth{
+
+class Auth extends Generic{
+
+    constructor(){
+        super('./login')
+    }
+
     get $email () { return $('input[type="email"]') }
     get $password () { return $('input[type="password"]') }
     get $signIn () { return $('button*=Sign in') }
@@ -23,6 +30,7 @@ class Auth{
             }
         )
     }
+
 }
 
 export default Auth();
