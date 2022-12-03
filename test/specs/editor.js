@@ -1,12 +1,14 @@
 import { user1 } from './../fixtures/users';
 import Editor from './../pageObjects/Editor.page';
 import Auth from './../pageObjects/Auth.page'
+import Article  from '../pageObjects/Article.page';
 import { Chance } from 'chance';
 
 
 const editor = new Editor();
 const auth = new Auth()
 const chance = new Chance();
+const article = new Article();
 
 describe('Post editor', function(){
     before(function(){
@@ -39,6 +41,9 @@ describe('Post editor', function(){
         editor.submitArticle(articleDetails);
 
         expect(browser).toHaveUrl('articles/test-title', {containing:true});
-        $('button=*Delete Article').click();
+        expect(article.$title).toHaveText(articleDetails.title);
+        expect(article.$body).toHaveText(articleDetails.body);
+        article.$delete.click();
+
     })
 })
