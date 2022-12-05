@@ -10,6 +10,10 @@ class Generic {
     load() {
         browser.url(this.path);
     }
+
+    get $siteHeader() { return $('[data-test-id="site-header"]') };
+    get $siteFooter() { return $('[data-test-id="site-footer]') };
+    get $siteNav() { return $('[data-test-id="site-nav]') };
 };
 
 export default Generic;
