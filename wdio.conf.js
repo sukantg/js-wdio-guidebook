@@ -1,3 +1,4 @@
+import Api from './test/utils/API'
 
 if(!process.SEED)
 {
@@ -220,6 +221,20 @@ exports.config = {
     //  },
 
     global.chance = new chance(process.env.SEED + specs[0]);
+
+    global.api = new Api('http://localhost:3000/api/');
+
+    browser.addCommand('loginViaApi',function(user){
+        const token = browser.call(() => {
+            return global.api.getAuthToken(user);
+        });
+
+        browser.url('./');
+        browser.execute((browserToken) => {
+            window.localStorage.setItem('id_token', browserToken)
+        });
+
+    });
 
     
     /**
