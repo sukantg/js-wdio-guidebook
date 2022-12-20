@@ -1,14 +1,3 @@
-
-if(!process.SEED)
-{
-    process.env.SEED = Math.random().toString();
-}
-
-console.log(
-    `ChanceJS seed : ${process.env.SEED} -- pass in using 
-    SEED=${process.env.SEED}`
-)
-
 exports.config = {
     //
     // ====================
@@ -32,7 +21,9 @@ exports.config = {
     // will be called from there.
     //
     specs: [
-        './test/specs/**/*.js'
+        // './test/specs/**/*.js',
+        './test/specs/shot.js'
+
     ],
     // Patterns to exclude.
     exclude: [
@@ -81,7 +72,7 @@ exports.config = {
     // Define all options that are relevant for the WebdriverIO instance here
     //
     // Level of logging verbosity: trace | debug | info | warn | error | silent
-    logLevel: 'silent',
+    logLevel: 'info',
     //
     // Set specific log levels per logger
     // loggers:
@@ -206,22 +197,8 @@ exports.config = {
      * @param {Array.<String>} specs        List of spec file paths that are to be run
      * @param {Object}         browser      instance of created browser/device session
      */
-    
-    before: function (capabilities, specs) {
-
-    // Throttles internet speed
-
-    //     browser.throttle({
-    //         latency: 1000,
-    //         offline: false,
-    //         downloadThroughput: 1000000,
-    //         uploadThroughput: 1000000
-    //     });
-    //  },
-
-    global.chance = new chance(process.env.SEED + specs[0]);
-
-    
+    // before: function (capabilities, specs) {
+    // },
     /**
      * Runs before a WebdriverIO command gets executed.
      * @param {String} commandName hook command name
@@ -315,5 +292,4 @@ exports.config = {
     */
     // onReload: function(oldSessionId, newSessionId) {
     // }
-    }
 }

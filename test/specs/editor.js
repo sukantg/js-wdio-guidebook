@@ -1,6 +1,7 @@
 import { user1 } from './../fixtures/users';
 import Editor from './../pageObjects/Editor.page';
 import Auth from './../pageObjects/Auth.page'
+import Article from './../pageObjects/Article.page'
 
 
 

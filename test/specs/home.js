@@ -29,5 +29,9 @@ describe('Logged in user',function(){
     if('should show both tabs',function(){
         expect(home.$feedTabsText).toEqual('Your feed','Gloabl feed');
     });
+
+    after(function(){
+        auth.clearSession();
+    });
     
 })
