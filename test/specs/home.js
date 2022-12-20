@@ -21,8 +21,7 @@ describe('Anonymous user',function(){
 
 describe('Logged in user',function(){
     before(function(){
-        auth.load();
-        auth.login(user1);
+        browser.loginViaApi(user1);
         home.load();
     });
 

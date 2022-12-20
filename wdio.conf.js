@@ -1,3 +1,15 @@
+import Api from './test/utils/API'
+
+if(!process.SEED)
+{
+    process.env.SEED = Math.random().toString();
+}
+
+console.log(
+    `ChanceJS seed : ${process.env.SEED} -- pass in using 
+    SEED=${process.env.SEED}`
+)
+
 exports.config = {
     //
     // ====================
@@ -197,8 +209,36 @@ exports.config = {
      * @param {Array.<String>} specs        List of spec file paths that are to be run
      * @param {Object}         browser      instance of created browser/device session
      */
-    // before: function (capabilities, specs) {
-    // },
+    
+    before: function (capabilities, specs) {
+
+    // Throttles internet speed
+
+    //     browser.throttle({
+    //         latency: 1000,
+    //         offline: false,
+    //         downloadThroughput: 1000000,
+    //         uploadThroughput: 1000000
+    //     });
+    //  },
+
+    global.chance = new chance(process.env.SEED + specs[0]);
+
+    global.api = new Api('http://localhost:3000/api/');
+
+    browser.addCommand('loginViaApi',function(user){
+        const token = browser.call(() => {
+            return global.api.getAuthToken(user);
+        });
+
+        browser.url('./');
+        browser.execute((browserToken) => {
+            window.localStorage.setItem('id_token', browserToken)
+        });
+
+    });
+
+    
     /**
      * Runs before a WebdriverIO command gets executed.
      * @param {String} commandName hook command name
